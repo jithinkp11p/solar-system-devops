@@ -6,10 +6,16 @@ pipeline {
   }
 
   stages{
+
     stage('check node version'){
       steps{
          sh 'node -v'
          sh 'npm -v'
+      }
+    }
+    stage('Install dependency'){
+      steps{
+          sh 'npm install --no-audits'
       }
     }
   }
