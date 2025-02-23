@@ -28,7 +28,7 @@ pipeline {
                   npm audit --only=prod
                   echo $1
                 '''
-                # npm audit --audit-level=critical
+                // npm audit --audit-level=critical
 
               }
             }
