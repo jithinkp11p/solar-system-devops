@@ -40,7 +40,7 @@ pipeline {
                 --format \'ALL\'
                 --prettyPrint''', odcInstallation: 'OWASP Dep-Check 10'
 
-              dependencyCheckPublisher pattern: ' dependency-check-report.xml'
+              dependencyCheckPublisher pattern: 'dependency-check-report.xml'
 
               publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './', reportFiles: 'dependency-check-jenkins.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
               }
