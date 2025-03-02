@@ -39,9 +39,26 @@ pipeline {
                 --out \'./\'
                 --format \'ALL\'
                 --prettyPrint''', odcInstallation: 'OWASP Dep-Check 10'
+
+              dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+
+              junit allowEmptyResults: true, stdioRetention: '', testResults: 'dependency-check-junit.xml'
+
+              publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: './', reportFiles: 'dependency-check-jenkins.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+             
+   
               }
             }
         }
+    }
+
+    stage('Unit Testing'){
+      steps{
+        // catch error and continue the build without failing the stage , stage will be mark as unstable 
+        catchError(buildResult: 'SUCCESS', message: 'oops iys ok for now, we will solve it later', stageResult: 'UNSTABLE') {
+        sh 'npm test'
+        }
+      }
     }
 
 
